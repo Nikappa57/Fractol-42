@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/06 00:30:03 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/06 01:02:09 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include "libft.h"
 # include "macos_keys.h"
+# include "events.h"
 
 /*		MLX		*/
 
@@ -42,5 +43,6 @@ typedef struct s_vars {
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		ft_mlx_create_trgb(int t, int r, int g, int b);
 int		ft_mlx_key_hook(int keycode, t_vars *vars);
+int		ft_mlx_close(int keycode, t_vars *vars);
 
 #endif
