@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/06 01:03:39 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/12 19:15:47 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dst;
 	int		offset;
 
-	offset = (y * data->line_length + x * (data->bits_per_pixel / 8));
-	dst = data->addr + offset;
+	offset = (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
 }
 
@@ -31,6 +31,9 @@ int	ft_mlx_close(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESCAPE)
 		mlx_destroy_window(vars->mlx, vars->win);
+	free(vars->frctl);
+	free(vars->img);
+	free(vars->w_info);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
