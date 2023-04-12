@@ -1,20 +1,23 @@
 NAME 				=	fractol
 
-INCLUDES			=	-I includes -I $(LIBFT_DIR)includes/
+INCLUDES			=	-I includes -I $(LIBFT_DIR)includes/ -I $(MLX_DIR)
 
 LIBFT				=	$(LIBFT_DIR)libft.a
 LIBFT_DIR			=	libft/
-LIB_FLAGS			=	-L $(LIBFT_DIR) -lft
+MLX					=	$(MLX_DIR)libmlx.a
+MLX_DIR				=	mlx/
+LIB_FLAGS			=	-L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx
+
 
 CC					=	gcc
 CFLAGS				=	-Wall -Wextra -Werror
-MINILIBX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+MINILIBX_FLAGS		=	-Lmlx -lmlx  -framework OpenGL -framework AppKit
 RM					=	/bin/rm -f
 NORM				=	norminette
 
 DIR_SRCS			=	srcs
 DIR_OBJS			=	objs
-SUBDIRS				=	main
+SUBDIRS				=	main frctl
 
 SRCS_PATHS			=	$(foreach dir, $(SUBDIRS), $(addprefix $(DIR_SRCS)/, $(dir)))
 OBJS_PATHS			=	$(foreach dir, $(SUBDIRS), $(addprefix $(DIR_OBJS)/, $(dir)))
@@ -30,11 +33,16 @@ all:				$(NAME)
 $(LIBFT):
 					make -C $(LIBFT_DIR)
 
-$(NAME):			$(OBJS) $(LIBFT)
+$(MLX):
+					make -C $(MLX_DIR)
+
+
+$(NAME):			$(OBJS) $(LIBFT) $(MLX)
 					$(CC) $(CFLAGS) $(MINILIBX_FLAGS) -o $(NAME) $(OBJS) $(LIB_FLAGS)
 
 clean:
 					make clean -C $(LIBFT_DIR)
+					make clean -C $(MLX_DIR)
 					$(RM) $(OBJS)
 					$(RM) -r $(DIR_OBJS)
 
