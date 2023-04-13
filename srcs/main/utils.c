@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/12 19:15:47 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:10:28 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	ft_mlx_close(int keycode, t_vars *vars)
 	free(vars->frctl);
 	free(vars->img);
 	free(vars->w_info);
+	free(vars);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
