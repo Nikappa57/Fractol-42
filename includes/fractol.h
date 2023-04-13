@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/12 18:48:13 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:01:09 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,16 @@ typedef struct s_wininfo {
 	int	zoom;
 }	t_winfo;
 
+/* fractol types */
+typedef enum e_ftype {
+	MANDELBROT,
+}	t_ftype;
+
+/* fractol names */
+# define MANDELBROT_STR	"mandelbrot"
+
 typedef struct s_frctl {
-	int		uuid;
+	t_ftype	type;
 	int		p;
 	int		q;
 	int		n;
