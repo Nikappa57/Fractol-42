@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/13 21:57:41 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/13 23:03:59 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ void	ft_mlx_pixel_put(t_data *img, int x, int y, int color)
 	offset = (y * img->line_length + x * (img->bits_per_pixel / 8));
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
-}
-
-int	ft_mlx_create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 // TODO: controllare leaks prendo la x
@@ -59,3 +54,4 @@ int	ft_mlx_key_hook(int keycode, t_vars *vars)
 		ft_mlx_close(KEY_ESCAPE, vars);
 	return (0);
 }
+
