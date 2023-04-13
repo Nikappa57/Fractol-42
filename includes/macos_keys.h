@@ -1,6 +1,7 @@
 #ifndef MACOS_KEY_H
 # define MACOS_KEY_H
 
+# define KEY_ERROR			-1
 # define KEY_ESCAPE			53
 # define KEY_F1 			122
 # define KEY_F2				120

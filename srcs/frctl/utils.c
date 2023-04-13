@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:22:28 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/12 18:41:53 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:00:14 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "fractol.h"
+#include "fractol.h"
 
-// void	frctl_init(t_frctl *data)
-// {
-	
-// }
+void	show_frctl(t_vars *vars)
+{
+	if (vars->frctl->type == MANDELBROT)
+		mandelbrot(vars);
+}
