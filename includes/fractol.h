@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/14 00:29:23 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/14 20:51:17 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@
 # include "libft.h"
 # include "macos_keys.h"
 # include "events.h"
+# include "colors.h"
 
 /*		VARS		*/
 
 /* img */
 typedef struct s_imgdata {
 	void	*img_ptr;
-	void	*loading_img_ptr;
 	char	*addr;
-	char	*loading_addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -34,6 +33,7 @@ typedef struct s_imgdata {
 
 /* win info */
 typedef struct s_wininfo {
+	int		loading;
 	double	zoom;
 	double	m_x;
 	double	m_y;
@@ -51,6 +51,7 @@ typedef enum e_ftype {
 typedef struct s_frctl {
 	t_ftype	type;
 	double	inc;
+	double	radius;
 	int		maxiter;
 }	t_frctl;
 
@@ -68,8 +69,6 @@ typedef struct s_vars {
 /* window info */
 # define WINDOW_WIDTH	1200
 # define WINDOW_HEIGHT	800
-# define LOADING_WIDTH	100
-# define LOADING_HEIGHT	100
 # define WINDOW_TITLE	"fract'ol"
 
 /* drow */
@@ -85,6 +84,9 @@ int		ft_mlx_create_trgb(int t, int r, int g, int b);
 int		ft_mlx_key_hook(int keycode, t_vars *vars);
 
 /*		FRACTOL		*/
+
+/* default info */
+# define MAX_ITER 100
 
 /* utils */
 void	show_frctl(t_vars *vars);
@@ -106,6 +108,8 @@ typedef struct s_mandel_info {
 
 /* init */
 void	init_winfo(t_winfo *w_info);
+void	init_frctl(t_frctl *frctl);
 t_vars	*init_vars(int argc, char **argv);
+void	set_info(t_vars *vars);
 
 #endif
