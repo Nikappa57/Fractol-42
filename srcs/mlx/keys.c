@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/14 01:10:29 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/14 20:24:59 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	incresse_iterations(t_frctl *frctl)
 {
 	if (frctl->maxiter == 0)
 		frctl->maxiter = 1;
-	else if (frctl->maxiter < 25)
+	else if (frctl->maxiter < MAX_ITER / 4)
 		frctl->maxiter *= 2;
-	else if (frctl->maxiter < 100)
-		frctl->maxiter += 25;
+	else if (frctl->maxiter < MAX_ITER)
+		frctl->maxiter += MAX_ITER / 4;
 	else
 		ft_printf("Max iterations reached\n");
 }
@@ -39,10 +39,10 @@ void	decrease_iterations(t_frctl *frctl)
 		ft_printf("Zero iterations reached\n");
 		frctl->maxiter = 1;
 	}
-	else if (frctl->maxiter < 50)
+	else if (frctl->maxiter < MAX_ITER / 2)
 		frctl->maxiter /= 2;
 	else
-		frctl->maxiter -= 20;
+		frctl->maxiter -= MAX_ITER / 4;
 }
 
 void	move(t_winfo *w_info, int x, int y)
@@ -51,8 +51,28 @@ void	move(t_winfo *w_info, int x, int y)
 	w_info->m_y += y * 0.1 / w_info->zoom;
 }
 
+void	mandel_inc(t_frctl *frctl, int plus)
+{
+	if (plus)
+		frctl->inc += 0.1;
+	else
+		frctl->inc -= 0.1;
+}
+
+void	mandel_radius(t_frctl *frctl, int plus)
+{
+	if (plus)
+		frctl->radius *= 2;
+	else
+		frctl->radius /= 2;
+	if (frctl->radius < 1)
+		frctl->radius = 1;
+}
+
 int	ft_mlx_key_hook(int keycode, t_vars *vars)
 {
+	if (vars->w_info->loading == 1)
+		return (0);
 	ft_printf("kye: %d\n", keycode);
 	ft_printf("ITER: %d\n", vars->frctl->maxiter);
 	if (keycode == KEY_ESCAPE)
@@ -64,7 +84,10 @@ int	ft_mlx_key_hook(int keycode, t_vars *vars)
 	else if ((keycode == KEY_PAD_ADD) || (keycode == KEY_MINUS))
 		zoom(vars->w_info, keycode == KEY_PAD_ADD);
 	else if (keycode == KEY_R)
+	{
 		init_winfo(vars->w_info);
+		init_frctl(vars->frctl);
+	}
 	else if ((keycode == KEY_UP) || (keycode == KEY_W))
 		move(vars->w_info, 0, -1);
 	else if ((keycode == KEY_LEFT) || (keycode == KEY_A))
@@ -73,6 +96,16 @@ int	ft_mlx_key_hook(int keycode, t_vars *vars)
 		move(vars->w_info, 0, 1);
 	else if ((keycode == KEY_RIGHT) || (keycode == KEY_D))
 		move(vars->w_info, 1, 0);
+	else if ((keycode == KEY_K) || (keycode == KEY_L))
+	{
+		if (vars->frctl->type == MANDELBROT)
+			mandel_inc(vars->frctl, keycode == KEY_K);
+	}
+	else if ((keycode == KEY_N) || (keycode == KEY_M))
+	{
+		if (vars->frctl->type == MANDELBROT)
+			mandel_radius(vars->frctl, keycode == KEY_N);
+	}
 	else
 		return (-1);
 	ft_mlx_window_reload(vars);

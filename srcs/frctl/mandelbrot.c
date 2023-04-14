@@ -6,12 +6,11 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/13 22:59:51 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/14 20:46:40 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define RADIUS 4
 
 void	mandelbrot_helper(t_vars *vars, int x, int y)
 {
@@ -33,9 +32,10 @@ void	mandelbrot_helper(t_vars *vars, int x, int y)
 		info.oim = info.newim;
 		info.newre = info.ore * info.ore - info.oim * info.oim + info.pr;
 		info.newim = vars->frctl->inc * info.ore * info.oim + info.pi;
-		if ((info.newre * info.newre + info.newim * info.newim) > RADIUS)
+		if ((info.newre * info.newre + info.newim * info.newim)
+			> vars->frctl->radius)
 		{
-			ft_mlx_pixel_put(vars->img, x, y, 0x00FF0000);
+			ft_mlx_pixel_put(vars->img, x, y, RED);
 			break ;
 		}
 	}
