@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/14 20:51:17 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:02:54 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum e_ftype {
 /* fractol info */
 typedef struct s_frctl {
 	t_ftype	type;
+	int		color;
 	double	inc;
 	double	radius;
 	int		maxiter;
@@ -57,6 +58,7 @@ typedef struct s_frctl {
 
 /* all vars */
 typedef struct s_vars {
+	int			*palette;
 	void		*mlx;
 	void		*win;
 	t_imgdata	*img;
@@ -96,6 +98,7 @@ void	mandelbrot(t_vars *vars);
 
 /* fractols info */
 typedef struct s_mandel_info {
+	int		i;
 	double	pr;
 	double	pi;
 	double	newre;
@@ -111,5 +114,6 @@ void	init_winfo(t_winfo *w_info);
 void	init_frctl(t_frctl *frctl);
 t_vars	*init_vars(int argc, char **argv);
 void	set_info(t_vars *vars);
+int		get_color(t_vars *frctl, int iter, double re, double im);
 
 #endif

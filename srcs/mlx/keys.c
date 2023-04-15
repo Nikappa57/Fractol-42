@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/14 20:24:59 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:03:58 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ void	mandel_radius(t_frctl *frctl, int plus)
 		frctl->radius = 1;
 }
 
+void	shift_color(t_frctl *frctl)
+{
+	frctl->color++;
+	if (frctl->color == PALETTE_N)
+		frctl->color = 0;
+}
+
 int	ft_mlx_key_hook(int keycode, t_vars *vars)
 {
 	if (vars->w_info->loading == 1)
@@ -106,6 +113,8 @@ int	ft_mlx_key_hook(int keycode, t_vars *vars)
 		if (vars->frctl->type == MANDELBROT)
 			mandel_radius(vars->frctl, keycode == KEY_N);
 	}
+	else if (keycode == KEY_C)
+		shift_color(vars->frctl);
 	else
 		return (-1);
 	ft_mlx_window_reload(vars);

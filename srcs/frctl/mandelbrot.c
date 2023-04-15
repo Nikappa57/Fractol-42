@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/14 20:46:40 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:02:47 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	mandelbrot_helper(t_vars *vars, int x, int y)
 {
-	int				i;
 	t_mandel_info	info;
 
 	info.pr = 1.5 * (x - WINDOW_WIDTH / 2)
@@ -25,8 +24,8 @@ void	mandelbrot_helper(t_vars *vars, int x, int y)
 	info.newim = 0;
 	info.ore = 0;
 	info.oim = 0;
-	i = 0;
-	while (i++ < vars->frctl->maxiter)
+	info.i = 0;
+	while (info.i++ < vars->frctl->maxiter)
 	{
 		info.ore = info.newre;
 		info.oim = info.newim;
@@ -35,7 +34,8 @@ void	mandelbrot_helper(t_vars *vars, int x, int y)
 		if ((info.newre * info.newre + info.newim * info.newim)
 			> vars->frctl->radius)
 		{
-			ft_mlx_pixel_put(vars->img, x, y, RED);
+			ft_mlx_pixel_put(vars->img, x, y,
+				get_color(vars, info.i, info.newre, info.newim));
 			break ;
 		}
 	}

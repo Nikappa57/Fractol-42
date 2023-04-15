@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/14 14:40:59 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:17:19 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_mlx_close(int keycode, t_vars *vars)
 		free(vars->img);
 	if (vars->w_info)
 		free(vars->w_info);
+	if (vars->palette)
+		free(vars->palette);
 	free(vars);
 	exit(EXIT_SUCCESS);
 	return (0);
