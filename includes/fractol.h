@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:02:54 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:38:28 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ typedef struct s_vars {
 # define WINDOW_TITLE	"fract'ol"
 
 /* drow */
-void	ft_mlx_pixel_put(t_imgdata *img, int x, int y, int color);
-int		ft_mlx_close(int keycode, t_vars *vars);
-int		ft_mlx_destroy(void *data);
-void	ft_mlx_window_reload(t_vars *vars);
+void			ft_mlx_pixel_put(t_imgdata *img, int x, int y, int color);
+int				ft_mlx_close(int keycode, t_vars *vars);
+int				ft_mlx_destroy(void *data);
+void			ft_mlx_window_reload(t_vars *vars);
 
 /* colors */
-int		ft_mlx_create_trgb(int t, int r, int g, int b);
+int				ft_mlx_create_trgb(int t, int r, int g, int b);
 
 /* keys */
-int		ft_mlx_key_hook(int keycode, t_vars *vars);
+int				ft_mlx_key_hook(int keycode, t_vars *vars);
 
 /*		FRACTOL		*/
 
@@ -91,10 +91,11 @@ int		ft_mlx_key_hook(int keycode, t_vars *vars);
 # define MAX_ITER 100
 
 /* utils */
-void	show_frctl(t_vars *vars);
+int				set_frctl_type(t_frctl *frctl, int argc, char **argv);
+void			show_frctl(t_vars *vars);
 
 /* fractols func */
-void	mandelbrot(t_vars *vars);
+void			mandelbrot(t_vars *vars);
 
 /* fractols info */
 typedef struct s_mandel_info {
@@ -107,13 +108,41 @@ typedef struct s_mandel_info {
 	double	oim;
 }	t_mandel_info;
 
+/*		COLOR		*/
+
+/* rgb */
+int				create_trgb(unsigned char t, unsigned char r,
+					unsigned char g, unsigned char b);
+unsigned char	get_t(int trgb);
+unsigned char	get_r(int trgb);
+unsigned char	get_g(int trgb);
+unsigned char	get_b(int trgb);
+
+/* palette */
+void			set_palette_1(int *palette);
+void			set_palette_2(int *palette);
+void			set_palette_3(int *palette);
+
+/* pixel color */
+int				get_color(t_vars *frctl, int iter, double re, double im);
+
 /*		MAIN		*/
 
+/* info */
+typedef struct s_info {
+	char	*iter;
+	char	*zoom;
+	char	*inc;
+	char	*radius;
+	char	*color;
+}	t_info;
+
+void			set_info(t_vars *vars);
+
 /* init */
-void	init_winfo(t_winfo *w_info);
-void	init_frctl(t_frctl *frctl);
-t_vars	*init_vars(int argc, char **argv);
-void	set_info(t_vars *vars);
-int		get_color(t_vars *frctl, int iter, double re, double im);
+void			init_winfo(t_winfo *w_info);
+void			init_frctl(t_frctl *frctl);
+t_vars			*init_vars(int argc, char **argv);
+void			set_info(t_vars *vars);
 
 #endif

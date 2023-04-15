@@ -6,28 +6,11 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:25:07 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:35:29 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static int	set_frctl_type(t_frctl *frctl, int argc, char **argv)
-{
-	t_ftype	ftype;
-
-	if (argc != 3)
-		return (0);
-	if (!ft_isstrdigit(argv[2]))
-		return (0);
-	if (!ft_strncmp(argv[1], MANDELBROT_STR, 11))
-		ftype = MANDELBROT;
-	else
-		return (0);
-	frctl->type = ftype;
-	frctl->maxiter = ft_atoi(argv[2]);
-	return (1);
-}
 
 void	init_winfo(t_winfo *w_info)
 {
@@ -42,60 +25,6 @@ void	init_frctl(t_frctl *frctl)
 	frctl->inc = 2;
 	frctl->radius = 4;
 	frctl->color = 0;
-}
-
-void	set_info(t_vars *vars)
-{
-	char	*iter;
-	char	*zoom;
-	char	*inc;
-	char	*radius;
-	char	*color;
-
-	if (vars->frctl->maxiter > MAX_ITER)
-		iter = ft_strdup("MAX");
-	else
-		iter = ft_itoa(vars->frctl->maxiter);
-	inc = ft_strjoin_gnl(ft_itoa(vars->frctl->inc * 100 - 200), "%");
-	radius = ft_itoa(vars->frctl->radius);
-	color = ft_itoa(vars->frctl->color + 1);
-	zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100 - 100), "%");
-	mlx_string_put(vars->mlx, vars->win, 15, 15, WHITE, "Max iter:");
-	mlx_string_put(vars->mlx, vars->win, 15, 30, WHITE, "Zoom:");
-	mlx_string_put(vars->mlx, vars->win, 15, 45, WHITE, "Inc+:");
-	mlx_string_put(vars->mlx, vars->win, 15, 60, WHITE, "Radius:");
-	mlx_string_put(vars->mlx, vars->win, 15, 75, WHITE, "Color:");
-	mlx_string_put(vars->mlx, vars->win, 80, 15, WHITE, iter);
-	mlx_string_put(vars->mlx, vars->win, 80, 30, WHITE, zoom);
-	mlx_string_put(vars->mlx, vars->win, 80, 45, WHITE, inc);
-	mlx_string_put(vars->mlx, vars->win, 80, 60, WHITE, radius);
-	mlx_string_put(vars->mlx, vars->win, 80, 75, WHITE, color);
-	free(iter);
-	free(inc);
-	free(radius);
-	free(zoom);
-	free(color);
-}
-
-void	set_palette_1(int *palette)
-{
-	*palette++ = VIOLETTE;
-	*palette++ = BLUE2;
-	*palette = WHITE;
-}
-
-void	set_palette_2(int *palette)
-{
-	*palette++ = RED;
-	*palette++ = ORANGE;
-	*palette = WHITE;
-}
-
-void	set_palette_3(int *palette)
-{
-	*palette++ = BLUE;
-	*palette++ = NAVY;
-	*palette = WHITE;
 }
 
 void	init_palette(t_vars *vars)

@@ -17,7 +17,7 @@ NORM				=	norminette
 
 DIR_SRCS			=	srcs
 DIR_OBJS			=	objs
-SUBDIRS				=	main frctl mlx
+SUBDIRS				=	main frctl mlx color
 
 SRCS_PATHS			=	$(foreach dir, $(SUBDIRS), $(addprefix $(DIR_SRCS)/, $(dir)))
 OBJS_PATHS			=	$(foreach dir, $(SUBDIRS), $(addprefix $(DIR_OBJS)/, $(dir)))

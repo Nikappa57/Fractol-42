@@ -6,39 +6,11 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:03:34 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:26:01 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 01:41:38 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-#define MAX_COLOR 16777215
-
-int	create_trgb(
-	unsigned char t, unsigned char r, unsigned char g, unsigned char b)
-{
-	return (*(int *)(unsigned char [4]){b, g, r, t});
-}
-
-unsigned char	get_t(int trgb)
-{
-	return (((unsigned char *)&trgb)[3]);
-}
-
-unsigned char	get_r(int trgb)
-{
-	return (((unsigned char *)&trgb)[2]);
-}
-
-unsigned char	get_g(int trgb)
-{
-	return (((unsigned char *)&trgb)[1]);
-}
-
-unsigned char	get_b(int trgb)
-{
-	return (((unsigned char *)&trgb)[0]);
-}
 
 int	get_color(t_vars *vars, int iter, double re, double img)
 {
