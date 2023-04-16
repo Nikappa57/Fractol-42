@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 13:37:04 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	hook_settings(int keycode, t_vars *vars)
 	if (keycode == KEY_ESCAPE)
 		ft_mlx_close(KEY_ESCAPE, vars);
 	else if (keycode == KEY_I)
-		incresse_iterations(vars->frctl);
+		return (increase_iterations(vars->frctl));
 	else if (keycode == KEY_O)
-		decrease_iterations(vars->frctl);
+		return (decrease_iterations(vars->frctl));
 	else if (keycode == KEY_C)
 		shift_color(vars->frctl);
 	else if (keycode == KEY_R)

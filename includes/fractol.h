@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 19:40:05 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int				ft_mlx_key_hook(int keycode, t_vars *vars);
 
 /* default info */
 # define MAX_ITER 100
+# define MIN_ITER 10
 
 /* fractols info */
 typedef struct s_mandel_info {
@@ -116,8 +117,8 @@ void			show_frctl(t_vars *vars);
 void			mandel_radius(t_frctl *frctl, int plus);
 void			mandel_inc(t_frctl *frctl, int plus);
 void			zoom(t_winfo *w_info, int plus);
-void			incresse_iterations(t_frctl *frctl);
-void			decrease_iterations(t_frctl *frctl);
+int				increase_iterations(t_frctl *frctl);
+int				decrease_iterations(t_frctl *frctl);
 void			move(t_winfo *w_info, int x, int y);
 
 /*		COLOR		*/

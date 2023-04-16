@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 19:37:47 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,40 @@ void	zoom(t_winfo *w_info, int plus)
 		w_info->zoom /= 1.1;
 }
 
-void	incresse_iterations(t_frctl *frctl)
+int	increase_iterations(t_frctl *frctl)
 {
-	if (frctl->maxiter == 0)
-		frctl->maxiter = 1;
-	else if (frctl->maxiter < MAX_ITER / 4)
-		frctl->maxiter *= 2;
+	int	old_iter;
+
+	old_iter = frctl->maxiter;
+	if (frctl->maxiter < MIN_ITER)
+		frctl->maxiter = MIN_ITER;
+	else if (frctl->maxiter < MAX_ITER / 2)
+		frctl->maxiter += MAX_ITER / 10;
 	else if (frctl->maxiter < MAX_ITER)
 		frctl->maxiter += MAX_ITER / 4;
-	else
-		ft_printf("Max iterations reached\n");
+	if (frctl->maxiter > MAX_ITER && old_iter <= MAX_ITER)
+		frctl->maxiter = MAX_ITER;
+	if (old_iter == frctl->maxiter)
+		return (0);
+	return (1);
 }
 
-void	decrease_iterations(t_frctl *frctl)
+int	decrease_iterations(t_frctl *frctl)
 {
-	if (frctl->maxiter < 2)
-	{
-		ft_printf("Zero iterations reached\n");
-		frctl->maxiter = 1;
-	}
-	else if (frctl->maxiter < MAX_ITER / 2)
-		frctl->maxiter /= 2;
-	else
+	int	old_iter;
+
+	old_iter = frctl->maxiter;
+	if (frctl->maxiter > MAX_ITER)
+		frctl->maxiter = MAX_ITER;
+	else if (frctl->maxiter > MAX_ITER / 2)
 		frctl->maxiter -= MAX_ITER / 4;
+	else if (frctl->maxiter > MIN_ITER)
+		frctl->maxiter -= MAX_ITER / 10;
+	if (frctl->maxiter < MIN_ITER && old_iter >= MIN_ITER)
+		frctl->maxiter = MIN_ITER;
+	if (old_iter == frctl->maxiter)
+		return (0);
+	return (1);
 }
 
 void	move(t_winfo *w_info, int x, int y)
