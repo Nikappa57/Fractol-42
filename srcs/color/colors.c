@@ -6,13 +6,20 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:03:34 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:41:38 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 11:29:20 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	get_color(t_vars *vars, int iter, double re, double img)
+void	shift_color(t_frctl *frctl)
+{
+	frctl->color++;
+	if (frctl->color == PALETTE_N)
+		frctl->color = 0;
+}
+
+int	get_color(t_vars *vars, int iter, double mag)
 {
 	int		*palette;
 	double	mu;
@@ -21,7 +28,7 @@ int	get_color(t_vars *vars, int iter, double re, double img)
 	double	t2;
 
 	palette = vars->palette + (COLOR_N * vars->frctl->color);
-	mu = iter + 1 - log(log(sqrt(re * re + img * img))) / log(2);
+	mu = iter + 1 - log(log(mag)) / log(2);
 	mu = mu / MAX_ITER * (sizeof(int) * COLOR_N);
 	clr1 = (int)mu;
 	t2 = mu - clr1;
