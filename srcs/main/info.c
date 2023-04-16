@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:35:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:40:10 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 19:42:51 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@ void	set_info(t_vars *vars)
 {
 	t_info	info;
 
+	info.iter = ft_itoa(vars->frctl->maxiter);
 	if (vars->frctl->maxiter > MAX_ITER)
-		info.iter = ft_strdup("MAX");
-	else
-		info.iter = ft_itoa(vars->frctl->maxiter);
-	info.inc = ft_strjoin_gnl(ft_itoa(vars->frctl->inc * 100 - 200), "%");
-	info.radius = ft_itoa(vars->frctl->radius);
+		info.iter = ft_strjoin_gnl(info.iter, " [MAX]");
+	info.inc = ft_strjoin_gnl(ft_itoa(vars->frctl->inc * 100), "/100");
+	info.radius = ft_itoa(sqrt(vars->frctl->radius));
 	info.color = ft_itoa(vars->frctl->color + 1);
-	info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100 - 100), "%");
+	info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100), "/100");
 	mlx_string_put(vars->mlx, vars->win, 15, 15, WHITE, "Max iter:");
 	mlx_string_put(vars->mlx, vars->win, 15, 30, WHITE, "Zoom:");
-	mlx_string_put(vars->mlx, vars->win, 15, 45, WHITE, "Inc+:");
+	mlx_string_put(vars->mlx, vars->win, 15, 45, WHITE, "Inc:");
 	mlx_string_put(vars->mlx, vars->win, 15, 60, WHITE, "Radius:");
 	mlx_string_put(vars->mlx, vars->win, 15, 75, WHITE, "Color:");
 	mlx_string_put(vars->mlx, vars->win, 80, 15, WHITE, info.iter);
