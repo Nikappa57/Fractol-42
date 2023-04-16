@@ -6,18 +6,27 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:35:29 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 19:37:25 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_winfo(t_winfo *w_info)
+void	init_winfo(t_winfo *w_info, t_ftype f_type)
 {
 	w_info->loading = 0;
-	w_info->zoom = 1;
-	w_info->m_x = -0.5;
-	w_info->m_y = 0;
+	if (f_type == MANDELBROT)
+	{
+		w_info->zoom = 0.68;
+		w_info->m_x = -0.65;
+		w_info->m_y = 0;
+	}
+	else if (f_type == JULIA)
+	{
+		w_info->zoom = -0.6;
+		w_info->m_x = 0;
+		w_info->m_y = 0;
+	}
 }
 
 void	init_frctl(t_frctl *frctl)
@@ -43,6 +52,7 @@ t_vars	*init_vars(int argc, char **argv)
 	vars = (t_vars *) malloc(sizeof(t_vars));
 	vars->img = NULL;
 	vars->w_info = NULL;
+	vars->palette = NULL;
 	vars->frctl = (t_frctl *) malloc(sizeof(t_frctl));
 	if (!set_frctl_type(vars->frctl, argc, argv))
 		ft_mlx_close(KEY_ERROR, vars);
@@ -56,7 +66,7 @@ t_vars	*init_vars(int argc, char **argv)
 			&img->line_length, &img->endian);
 	vars->img = img;
 	vars->w_info = (t_winfo *) malloc(sizeof(t_winfo));
-	init_winfo(vars->w_info);
+	init_winfo(vars->w_info, vars->frctl->type);
 	init_palette(vars);
 	return (vars);
 }

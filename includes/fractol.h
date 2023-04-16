@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:38:28 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 19:40:05 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ typedef struct s_wininfo {
 /* fractol types */
 typedef enum e_ftype {
 	MANDELBROT,
+	JULIA,
 }	t_ftype;
 
 /* fractol names */
 # define MANDELBROT_STR	"mandelbrot"
+# define JULIA_STR		"julia"
 
 /* fractol info */
 typedef struct s_frctl {
@@ -90,13 +92,6 @@ int				ft_mlx_key_hook(int keycode, t_vars *vars);
 /* default info */
 # define MAX_ITER 100
 
-/* utils */
-int				set_frctl_type(t_frctl *frctl, int argc, char **argv);
-void			show_frctl(t_vars *vars);
-
-/* fractols func */
-void			mandelbrot(t_vars *vars);
-
 /* fractols info */
 typedef struct s_mandel_info {
 	int		i;
@@ -107,6 +102,23 @@ typedef struct s_mandel_info {
 	double	ore;
 	double	oim;
 }	t_mandel_info;
+
+/* utils */
+int				get_xmove_pos(int x, double zoom, double move_x);
+int				get_ymove_pos(int y, double zoom, double move_y);
+int				check_radius(t_vars *vars, t_mandel_info info, int x, int y);
+int				set_frctl_type(t_frctl *frctl, int argc, char **argv);
+
+/* fractol */
+void			show_frctl(t_vars *vars);
+
+/* actions */
+void			mandel_radius(t_frctl *frctl, int plus);
+void			mandel_inc(t_frctl *frctl, int plus);
+void			zoom(t_winfo *w_info, int plus);
+void			incresse_iterations(t_frctl *frctl);
+void			decrease_iterations(t_frctl *frctl);
+void			move(t_winfo *w_info, int x, int y);
 
 /*		COLOR		*/
 
@@ -124,7 +136,8 @@ void			set_palette_2(int *palette);
 void			set_palette_3(int *palette);
 
 /* pixel color */
-int				get_color(t_vars *frctl, int iter, double re, double im);
+int				get_color(t_vars *vars, int iter, double mag);
+void			shift_color(t_frctl *frctl);
 
 /*		MAIN		*/
 
@@ -140,7 +153,7 @@ typedef struct s_info {
 void			set_info(t_vars *vars);
 
 /* init */
-void			init_winfo(t_winfo *w_info);
+void			init_winfo(t_winfo *w_info, t_ftype f_type);
 void			init_frctl(t_frctl *frctl);
 t_vars			*init_vars(int argc, char **argv);
 void			set_info(t_vars *vars);
