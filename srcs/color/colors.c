@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:03:34 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 11:29:20 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 11:09:31 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_color(t_vars *vars, int iter, double mag)
 	double	t2;
 
 	palette = vars->palette + (COLOR_N * vars->frctl->color);
-	mu = iter + 1 - log(log(mag)) / log(2);
+	mu = iter + 1 - log(log(mag)) / log(sqrt(vars->frctl->radius));
 	mu = mu / MAX_ITER * (sizeof(int) * COLOR_N);
 	clr1 = (int)mu;
 	t2 = mu - clr1;
