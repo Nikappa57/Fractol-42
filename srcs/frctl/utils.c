@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 17:22:28 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/16 23:22:16 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 23:30:41 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ int	check_radius(t_vars *vars, t_frctl_info info, int x, int y)
 	return (0);
 }
 
-int	set_frctl_type(t_frctl *frctl, int argc, char **argv)
+#include <stdio.h>
+int	set_frctl_type(t_frctl *frctl, t_winfo *w_info, int argc, char **argv)
 {
 	t_ftype	ftype;
 
-	if (argc != 3)
+	if (argc < 3)
 		return (0);
 	if (!ft_isstrdigit(argv[2]))
 		return (0);
@@ -62,6 +63,27 @@ int	set_frctl_type(t_frctl *frctl, int argc, char **argv)
 		ftype = JULIA;
 	else
 		return (0);
+	if (ftype == MANDELBROT && argc != 3)
+		return (0);
+	if (ftype == JULIA)
+	{
+		if (argc == 5)
+		{
+			if (!ft_isstrdouble(argv[3]) || !ft_isstrdouble(argv[4]))
+				return (0);
+			frctl->julia_mx = ft_atodb(argv[3]);
+			frctl->julia_my = ft_atodb(argv[4]);
+			w_info->track_mouse = 0;
+		}
+		else if (argc == 3)
+		{
+			frctl->julia_mx = 0;
+			frctl->julia_my = 0;
+			w_info->track_mouse = 1;
+		}
+		else
+			return (0);
+	}
 	frctl->type = ftype;
 	frctl->maxiter = ft_atoi(argv[2]);
 	return (1);

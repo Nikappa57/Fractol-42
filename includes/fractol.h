@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 11:45:55 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/17 23:30:27 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_mandel_info {
 double			get_xmove_pos(int x, double zoom, double move_x);
 double			get_ymove_pos(int y, double zoom, double move_y);
 int				check_radius(t_vars *vars, t_frctl_info info, int x, int y);
-int				set_frctl_type(t_frctl *frctl, int argc, char **argv);
+int				set_frctl_type(t_frctl *frctl, t_winfo *w_info, int argc, char **argv);
 void			mouse_update_julia(t_vars *vars);
 
 /* fractol */
@@ -168,5 +168,6 @@ int				set_loading(t_vars *vars);
 void			init_winfo(t_winfo *w_info, t_ftype f_type);
 void			init_frctl(t_frctl *frctl, int *win);
 t_vars			*init_vars(int argc, char **argv);
+void			print_usage(void);
 
 #endif
