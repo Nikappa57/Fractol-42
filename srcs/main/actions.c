@@ -6,18 +6,21 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 23:49:18 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	zoom(t_winfo *w_info, int plus)
+int	zoom(t_winfo *w_info, int plus)
 {
-	if (plus)
+	if (plus && w_info->zoom < DBL_MAX / 1.1)
 		w_info->zoom *= 1.1;
-	else
+	else if (w_info->zoom > 0.02f)
 		w_info->zoom /= 1.1;
+	else
+		return (0);
+	return (1);
 }
 
 int	increase_iterations(t_frctl *frctl)

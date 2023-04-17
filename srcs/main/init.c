@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 19:37:25 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 23:20:46 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,25 @@ void	init_winfo(t_winfo *w_info, t_ftype f_type)
 	}
 	else if (f_type == JULIA)
 	{
-		w_info->zoom = -0.6;
+		w_info->zoom = 0.6;
 		w_info->m_x = 0;
 		w_info->m_y = 0;
 	}
 }
 
-void	init_frctl(t_frctl *frctl)
+void	init_frctl(t_frctl *frctl, int *win)
 {
+	(void)win;
 	frctl->inc = 2;
 	frctl->radius = 4;
 	frctl->color = 0;
+	if (frctl->type == JULIA)
+	{
+		frctl->julia_mx = 0;
+		frctl->julia_my = 0;
+		// TODO:
+		// mlx_mouse_move(win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}
 }
 
 void	init_palette(t_vars *vars)
@@ -56,7 +64,7 @@ t_vars	*init_vars(int argc, char **argv)
 	vars->frctl = (t_frctl *) malloc(sizeof(t_frctl));
 	if (!set_frctl_type(vars->frctl, argc, argv))
 		ft_mlx_close(KEY_ERROR, vars);
-	init_frctl(vars->frctl);
+	init_frctl(vars->frctl, vars->win);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(
 			vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);

@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/16 19:38:25 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 22:45:12 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static void	mandelbrot(t_vars *vars, int x, int y)
 {
-	t_mandel_info	info;
+	t_frctl_info	info;
 
-	info.pr = 1.5 * (x - WINDOW_WIDTH / 2)
-		/ (0.7 * vars->w_info->zoom * WINDOW_WIDTH) + vars->w_info->m_x;
-	info.pi = (y - WINDOW_HEIGHT / 2)
-		/ (0.5 * vars->w_info->zoom * WINDOW_HEIGHT) + vars->w_info->m_y;
+	info.pr = get_xmove_pos(x, vars->w_info->zoom, vars->w_info->m_x);
+	info.pi = get_ymove_pos(y, vars->w_info->zoom, vars->w_info->m_y);
 	info.newre = 0;
 	info.newim = 0;
 	info.ore = 0;
@@ -38,12 +36,10 @@ static void	mandelbrot(t_vars *vars, int x, int y)
 
 static void	julia(t_vars *vars, int x, int y)
 {
-	t_mandel_info	info;
+	t_frctl_info	info;
 
-	info.newre = 1.5 * (x - WINDOW_WIDTH / 2)
-		/ (0.7 * vars->w_info->zoom * WINDOW_WIDTH) + vars->w_info->m_x;
-	info.newim = (y - WINDOW_HEIGHT / 2)
-		/ (0.5 * vars->w_info->zoom * WINDOW_HEIGHT) + vars->w_info->m_y;
+	info.newre = get_xmove_pos(x, vars->w_info->zoom, vars->w_info->m_x);
+	info.newim = get_ymove_pos(y, vars->w_info->zoom, vars->w_info->m_y);
 	info.ore = 0;
 	info.oim = 0;
 	info.i = 0;
@@ -51,8 +47,8 @@ static void	julia(t_vars *vars, int x, int y)
 	{
 		info.ore = info.newre;
 		info.oim = info.newim;
-		info.newre = info.ore * info.ore - info.oim * info.oim -0.7f;
-		info.newim = vars->frctl->inc * info.ore * info.oim + 0.27015f;
+		info.newre = info.ore * info.ore - info.oim * info.oim + vars->frctl->julia_mx;
+		info.newim = vars->frctl->inc * info.ore * info.oim + vars->frctl->julia_my;
 		if (check_radius(vars, info, x, y))
 			break ;
 	}

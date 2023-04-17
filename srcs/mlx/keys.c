@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 23:40:40 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	hook_actions(int keycode, t_vars *vars)
 {
 	if ((keycode == KEY_PAD_ADD) || (keycode == KEY_MINUS))
-		zoom(vars->w_info, keycode == KEY_PAD_ADD);
+		return (zoom(vars->w_info, keycode == KEY_PAD_ADD));
 	else if ((keycode == KEY_UP) || (keycode == KEY_W))
 		move(vars->w_info, 0, -1);
 	else if ((keycode == KEY_LEFT) || (keycode == KEY_A))
@@ -42,7 +42,7 @@ static int	hook_settings(int keycode, t_vars *vars)
 	else if (keycode == KEY_R)
 	{
 		init_winfo(vars->w_info, vars->frctl->type);
-		init_frctl(vars->frctl);
+		init_frctl(vars->frctl, vars->win);
 	}
 	else
 		return (0);
@@ -72,7 +72,7 @@ static int	hook_frctl_actions(int keycode, t_vars *vars)
 	return (1);
 }
 
-int	ft_mlx_key_hook(int keycode, t_vars *vars)
+int	key_hook(int keycode, t_vars *vars)
 {
 	if (!hook_actions(keycode, vars)
 		&& !hook_settings(keycode, vars)

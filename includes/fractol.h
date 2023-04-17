@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 20:25:56 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/16 23:40:57 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../mlx/mlx.h"
 # include <math.h>
+# include <limits.h>
+# include <float.h>
 # include "libft.h"
 # include "macos_keys.h"
 # include "events.h"
@@ -35,6 +37,8 @@ typedef struct s_imgdata {
 typedef struct s_wininfo {
 	int		loading;
 	double	zoom;
+	int		mouse_x;
+	int		mouse_y;
 	double	m_x;
 	double	m_y;
 }	t_winfo;
@@ -56,6 +60,8 @@ typedef struct s_frctl {
 	double	inc;
 	double	radius;
 	int		maxiter;
+	double	julia_mx;
+	double	julia_my;
 }	t_frctl;
 
 /* all vars */
@@ -85,7 +91,8 @@ void			ft_mlx_window_reload(t_vars *vars);
 int				ft_mlx_create_trgb(int t, int r, int g, int b);
 
 /* keys */
-int				ft_mlx_key_hook(int keycode, t_vars *vars);
+int				key_hook(int keycode, t_vars *vars);
+int				mousemove_hook(int x, int y, t_vars *vars);
 
 /*		FRACTOL		*/
 
@@ -102,13 +109,14 @@ typedef struct s_mandel_info {
 	double	newim;
 	double	ore;
 	double	oim;
-}	t_mandel_info;
+}	t_frctl_info;
 
 /* utils */
-int				get_xmove_pos(int x, double zoom, double move_x);
-int				get_ymove_pos(int y, double zoom, double move_y);
-int				check_radius(t_vars *vars, t_mandel_info info, int x, int y);
+double			get_xmove_pos(int x, double zoom, double move_x);
+double			get_ymove_pos(int y, double zoom, double move_y);
+int				check_radius(t_vars *vars, t_frctl_info info, int x, int y);
 int				set_frctl_type(t_frctl *frctl, int argc, char **argv);
+void			mouse_update_julia(t_vars *vars);
 
 /* fractol */
 void			show_frctl(t_vars *vars);
@@ -116,7 +124,7 @@ void			show_frctl(t_vars *vars);
 /* actions */
 void			mandel_radius(t_frctl *frctl, int plus);
 void			mandel_inc(t_frctl *frctl, int plus);
-void			zoom(t_winfo *w_info, int plus);
+int				zoom(t_winfo *w_info, int plus);
 int				increase_iterations(t_frctl *frctl);
 int				decrease_iterations(t_frctl *frctl);
 void			move(t_winfo *w_info, int x, int y);
@@ -155,7 +163,7 @@ void			set_info(t_vars *vars);
 
 /* init */
 void			init_winfo(t_winfo *w_info, t_ftype f_type);
-void			init_frctl(t_frctl *frctl);
+void			init_frctl(t_frctl *frctl, int *win);
 t_vars			*init_vars(int argc, char **argv);
 void			set_info(t_vars *vars);
 
