@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 23:49:18 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 11:02:14 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ void	move(t_winfo *w_info, int x, int y)
 {
 	w_info->m_x += x * 0.1 / w_info->zoom;
 	w_info->m_y += y * 0.1 / w_info->zoom;
+}
+
+void	mouse_track(t_winfo *w_info)
+{
+	w_info->track_mouse = !w_info->track_mouse;
 }

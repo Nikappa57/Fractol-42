@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 23:40:40 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 12:47:58 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	hook_actions(int keycode, t_vars *vars)
 {
-	if ((keycode == KEY_PAD_ADD) || (keycode == KEY_MINUS))
+	if ((keycode == KEY_PAD_ADD) || (keycode == KEY_PAD_SUB))
 		return (zoom(vars->w_info, keycode == KEY_PAD_ADD));
 	else if ((keycode == KEY_UP) || (keycode == KEY_W))
 		move(vars->w_info, 0, -1);
@@ -51,22 +51,14 @@ static int	hook_settings(int keycode, t_vars *vars)
 
 static int	hook_frctl_actions(int keycode, t_vars *vars)
 {
-	if ((keycode == KEY_K) || (keycode == KEY_L))
-	{
-		if ((vars->frctl->type == MANDELBROT)
-			|| (vars->frctl->type == JULIA))
-			mandel_inc(vars->frctl, keycode == KEY_K);
-		else
-			return (0);
-	}
-	else if ((keycode == KEY_N) || (keycode == KEY_M))
-	{
-		if ((vars->frctl->type == MANDELBROT)
-			|| (vars->frctl->type == JULIA))
-			mandel_radius(vars->frctl, keycode == KEY_N);
-		else
-			return (0);
-	}
+	if (((keycode == KEY_K) || (keycode == KEY_L))
+		&& ((vars->frctl->type == MANDELBROT) || (vars->frctl->type == JULIA)))
+		mandel_inc(vars->frctl, keycode == KEY_K);
+	else if (((keycode == KEY_N) || (keycode == KEY_M))
+		&& ((vars->frctl->type == MANDELBROT) || (vars->frctl->type == JULIA)))
+		mandel_radius(vars->frctl, keycode == KEY_N);
+	else if ((keycode == KEY_T) && (vars->frctl->type == JULIA))
+		mouse_track(vars->w_info);
 	else
 		return (0);
 	return (1);
