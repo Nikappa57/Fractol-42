@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:35:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 20:22:07 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 12:52:48 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,14 @@ void	set_info(t_vars *vars)
 	free(info.radius);
 	free(info.zoom);
 	free(info.color);
+}
+
+int	set_loading(t_vars *vars)
+{
+	if (!vars->w_info->loading)
+	{
+		mlx_string_put(vars->mlx, vars->win, 15, 100, WHITE, "LOADING...");
+		vars->w_info->loading = 0;
+	}
+	return (0);
 }

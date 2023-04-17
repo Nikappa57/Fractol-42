@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/16 22:45:12 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/17 12:48:40 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ static void	julia(t_vars *vars, int x, int y)
 	{
 		info.ore = info.newre;
 		info.oim = info.newim;
-		info.newre = info.ore * info.ore - info.oim * info.oim + vars->frctl->julia_mx;
-		info.newim = vars->frctl->inc * info.ore * info.oim + vars->frctl->julia_my;
+		info.newre = info.ore * info.ore - info.oim * info.oim
+			+ vars->frctl->julia_mx;
+		info.newim = vars->frctl->inc * info.ore * info.oim
+			+ vars->frctl->julia_my;
 		if (check_radius(vars, info, x, y))
 			break ;
 	}
@@ -60,6 +62,7 @@ void	show_frctl(t_vars *vars)
 	int		y;
 	t_ftype	f_type;
 
+	vars->w_info->loading = 1;
 	f_type = vars->frctl->type;
 	y = 0;
 	while (y < WINDOW_HEIGHT)
