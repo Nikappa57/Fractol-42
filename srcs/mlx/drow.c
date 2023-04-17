@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drow.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 12:47:08 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/17 23:30:01 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_mlx_pixel_put(t_imgdata *img, int x, int y, int color)
 int	ft_mlx_close(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ERROR)
-		ft_printf("Usage: ./fractol [...]\n");
+		print_usage();
 	if (keycode == KEY_ESCAPE)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
