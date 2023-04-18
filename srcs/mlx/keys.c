@@ -6,7 +6,7 @@
 /*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 12:47:58 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:45:02 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ static int	hook_settings(int keycode, t_vars *vars)
 static int	hook_frctl_actions(int keycode, t_vars *vars)
 {
 	if (((keycode == KEY_K) || (keycode == KEY_L))
-		&& ((vars->frctl->type == MANDELBROT) || (vars->frctl->type == JULIA)))
-		mandel_inc(vars->frctl, keycode == KEY_K);
+		&& ((vars->frctl->type == MANDELBROT)
+			|| (vars->frctl->type == JULIA)))
+		return (mandel_inc(vars->frctl, keycode == KEY_K));
 	else if (((keycode == KEY_N) || (keycode == KEY_M))
 		&& ((vars->frctl->type == MANDELBROT) || (vars->frctl->type == JULIA)))
-		mandel_radius(vars->frctl, keycode == KEY_N);
+		return (mandel_radius(vars->frctl, keycode == KEY_N));
 	else if ((keycode == KEY_T) && (vars->frctl->type == JULIA))
 		mouse_track(vars->w_info);
 	else
