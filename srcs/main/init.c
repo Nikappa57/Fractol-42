@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 23:09:37 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/18 12:27:33 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_winfo(t_winfo *w_info, t_ftype f_type)
 {
-	w_info->loading = 0;
 	if (f_type == MANDELBROT)
 	{
 		w_info->zoom = 0.68;

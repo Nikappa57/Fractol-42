@@ -6,7 +6,7 @@
 /*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/17 12:48:40 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:27:24 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	show_frctl(t_vars *vars)
 	int		y;
 	t_ftype	f_type;
 
-	vars->w_info->loading = 1;
 	f_type = vars->frctl->type;
 	y = 0;
 	while (y < WINDOW_HEIGHT)
