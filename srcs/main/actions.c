@@ -6,7 +6,7 @@
 /*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 11:02:14 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:58:17 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	zoom(t_winfo *w_info, int plus)
 {
-	if (plus && w_info->zoom < DBL_MAX / 1.1)
+	if (plus && (w_info->zoom * 100 < INT_MAX))
 		w_info->zoom *= 1.1;
-	else if (w_info->zoom > 0.02f)
+	else if (!plus && w_info->zoom > 0.02f)
 		w_info->zoom /= 1.1;
 	else
 		return (0);

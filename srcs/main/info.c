@@ -6,7 +6,7 @@
 /*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:35:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 12:52:48 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/18 12:50:52 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ static void	drow_info(t_vars *vars, t_info info)
 	mlx_string_put(vars->mlx, vars->win, 80, 45, WHITE, info.inc);
 	mlx_string_put(vars->mlx, vars->win, 80, 60, WHITE, info.radius);
 	mlx_string_put(vars->mlx, vars->win, 80, 75, WHITE, info.color);
+	free(info.iter);
+	free(info.inc);
+	free(info.radius);
+	free(info.zoom);
+	free(info.color);
 }
 
 void	set_info(t_vars *vars)
@@ -40,23 +45,21 @@ void	set_info(t_vars *vars)
 	else if (vars->frctl->maxiter < MIN_ITER)
 		info.iter = ft_strjoin_gnl(info.iter, " [< MAX]");
 	info.inc = ft_strjoin_gnl(ft_itoa(vars->frctl->inc * 100), "/100");
+	if (vars->frctl->inc * 100 > INT_MAX - 10)
+		info.inc = ft_strjoin_gnl(info.inc, " [MAX]");
+	else if (vars->frctl->inc * 100 < INT_MIN + 10)
+		info.inc = ft_strjoin_gnl(info.inc, " [MIN]");
 	info.radius = ft_itoa(sqrt(vars->frctl->radius));
+	if (vars->frctl->radius >= INT_MAX / vars->frctl->radius - 1)
+		info.radius = ft_strjoin_gnl(info.radius, " [MAX]");
+	else if (vars->frctl->radius < 8)
+		info.radius = ft_strjoin_gnl(info.radius, " [MIN]");
 	info.color = ft_itoa(vars->frctl->color + 1);
-	info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100), "/100");
+	if (vars->w_info->zoom * 100 > INT_MAX)
+		info.zoom = ft_strdup("[MAX]");
+	else if (vars->w_info->zoom * 100 < INT_MIN)
+		info.zoom = ft_strdup("[MIN]");
+	else
+		info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100), "/100");
 	drow_info(vars, info);
-	free(info.iter);
-	free(info.inc);
-	free(info.radius);
-	free(info.zoom);
-	free(info.color);
-}
-
-int	set_loading(t_vars *vars)
-{
-	if (!vars->w_info->loading)
-	{
-		mlx_string_put(vars->mlx, vars->win, 15, 100, WHITE, "LOADING...");
-		vars->w_info->loading = 0;
-	}
-	return (0);
 }

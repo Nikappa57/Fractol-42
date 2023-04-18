@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   mandel_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:31:41 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 13:07:04 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/18 12:44:48 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandel_radius(t_frctl *frctl, int plus)
+int	mandel_radius(t_frctl *frctl, int plus)
 {
-	if (plus)
+	if (plus && (frctl->radius < INT_MAX / frctl->radius - 1))
 		frctl->radius *= frctl->radius;
-	else
+	else if (!plus && frctl->radius >= 8)
 		frctl->radius = sqrt(frctl->radius);
-	if (frctl->radius < 4)
-		frctl->radius = 4;
+	else
+		return (0);
+	return (1);
 }
 
-void	mandel_inc(t_frctl *frctl, int plus)
+int	mandel_inc(t_frctl *frctl, int plus)
 {
-	if (plus)
+	if (plus && (frctl->inc * 100 <= INT_MAX - 10))
 		frctl->inc += 0.1;
-	else
+	else if (frctl->inc * 100 >= INT_MIN + 10)
 		frctl->inc -= 0.1;
+	else
+		return (0);
+	return (1);
 }
