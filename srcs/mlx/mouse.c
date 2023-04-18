@@ -6,11 +6,23 @@
 /*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 21:31:17 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 12:47:55 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:19:26 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	mouse_hook(int keycode, int x, int y, t_vars *vars)
+{
+	x = y;
+	ft_printf("CODE: %d\n", keycode);
+	if ((keycode == SCROLL_UP) || (keycode == SCROLL_DOWN))
+	{
+		zoom(vars->w_info, keycode == SCROLL_DOWN);
+		ft_mlx_window_reload(vars);
+	}
+	return (0);
+}
 
 int	mousemove_hook(int x, int y, t_vars *vars)
 {

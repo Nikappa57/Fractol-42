@@ -2,6 +2,13 @@
 # define MACOS_KEY_H
 
 # define KEY_ERROR			-1
+
+# define CLICK_LEFT			1
+# define CLICK_RIGHT		2
+# define CLICK_MIDDLE		3
+# define SCROLL_UP			4
+# define SCROLL_DOWN		5
+
 # define KEY_ESCAPE			53
 # define KEY_F1 			122
 # define KEY_F2				120
