@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:41:48 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 23:30:01 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/19 00:26:59 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,6 @@ void	ft_mlx_pixel_put(t_imgdata *img, int x, int y, int color)
 	offset = (y * img->line_length + x * (img->bits_per_pixel / 8));
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
-}
-
-// TODO: controllare leaks prendo la x
-int	ft_mlx_close(int keycode, t_vars *vars)
-{
-	if (keycode == KEY_ERROR)
-		print_usage();
-	if (keycode == KEY_ESCAPE)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-	}
-	if (vars->frctl)
-		free(vars->frctl);
-	if (vars->img)
-		free(vars->img);
-	if (vars->w_info)
-		free(vars->w_info);
-	if (vars->palette)
-		free(vars->palette);
-	free(vars);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-int	ft_mlx_destroy(void *data)
-{
-	(void)data;
-	exit(0);
 }
 
 void	ft_mlx_window_reload(t_vars *vars)
