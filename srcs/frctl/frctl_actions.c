@@ -3,32 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   mandel_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:31:41 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/18 12:44:48 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:44:07 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandel_radius(t_frctl *frctl, int plus)
+int	change_radius(t_frctl *frctl, int plus)
 {
-	if (plus && (frctl->radius < INT_MAX / frctl->radius - 1))
-		frctl->radius *= frctl->radius;
-	else if (!plus && frctl->radius >= 8)
-		frctl->radius = sqrt(frctl->radius);
+	if (frctl->type == NEWTON)
+	{
+		if (plus && (frctl->radius < INT_MAX / 1.1))
+		{
+			frctl->radius *= 1.1;
+		}
+		else if (!plus && frctl->radius > 0.2)
+		{
+			frctl->radius /= 1.1;
+		}
+		else
+			return (0);
+	}
 	else
-		return (0);
+	{
+		if (plus && (frctl->radius < INT_MAX / frctl->radius - 1))
+			frctl->radius *= frctl->radius;
+		else if (!plus && frctl->radius >= 8)
+			frctl->radius = sqrt(frctl->radius);
+		else
+			return (0);
+	}
 	return (1);
 }
 
-int	mandel_inc(t_frctl *frctl, int plus)
+int	change_inc(t_frctl *frctl, int plus)
 {
-	if (plus && (frctl->inc * 100 <= INT_MAX - 10))
-		frctl->inc += 0.1;
-	else if (frctl->inc * 100 >= INT_MIN + 10)
-		frctl->inc -= 0.1;
+	if (plus && (frctl->inc * 100 <= INT_MAX - 1))
+		frctl->inc += 0.01;
+	else if (frctl->inc * 100 >= INT_MIN + 1)
+		frctl->inc -= 0.01;
 	else
 		return (0);
 	return (1);

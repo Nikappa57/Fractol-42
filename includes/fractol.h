@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/18 13:07:32 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:59:25 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ typedef struct s_wininfo {
 /* fractol types */
 typedef enum e_ftype {
 	MANDELBROT,
+	NEWTON,
 	JULIA,
 }	t_ftype;
 
 /* fractol names */
 # define MANDELBROT_STR	"mandelbrot"
 # define JULIA_STR		"julia"
+# define NEWTON_STR		"newton"
 
 /* fractol info */
 typedef struct s_frctl {
@@ -79,7 +81,7 @@ typedef struct s_vars {
 /* window info */
 # define WINDOW_WIDTH	1200
 # define WINDOW_HEIGHT	800
-# define WINDOW_TITLE	"fract'ol"
+# define WINDOW_TITLE	"fract'ol - "
 
 /* drow */
 void			ft_mlx_pixel_put(t_imgdata *img, int x, int y, int color);
@@ -110,6 +112,8 @@ typedef struct s_mandel_info {
 	double	newim;
 	double	ore;
 	double	oim;
+	double	nwtn_incx;
+	double	nwtn_incy;
 }	t_frctl_info;
 
 /* utils */
@@ -124,12 +128,12 @@ void			mouse_update_julia(t_vars *vars);
 void			show_frctl(t_vars *vars);
 
 /* actions */
-int				mandel_radius(t_frctl *frctl, int plus);
-int				mandel_inc(t_frctl *frctl, int plus);
-int				zoom(t_winfo *w_info, int plus);
+int				change_radius(t_frctl *frctl, int plus);
+int				change_inc(t_frctl *frctl, int plus);
+int				zoom(t_winfo *w_info, t_ftype ftype, int plus);
 int				increase_iterations(t_frctl *frctl);
 int				decrease_iterations(t_frctl *frctl);
-void			move(t_winfo *w_info, int x, int y);
+void			move(t_winfo *w_info, t_ftype ftype, int x, int y);
 void			mouse_track(t_winfo *w_info);
 
 /*		COLOR		*/

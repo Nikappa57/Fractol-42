@@ -3,21 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/18 12:58:17 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:27:00 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	zoom(t_winfo *w_info, int plus)
+int	zoom(t_winfo *w_info, t_ftype ftype, int plus)
 {
 	if (plus && (w_info->zoom * 100 < INT_MAX))
-		w_info->zoom *= 1.1;
+	{
+		if (ftype == NEWTON)
+			w_info->zoom /= 1.1;
+		else
+			w_info->zoom *= 1.1;
+	}
 	else if (!plus && w_info->zoom > 0.02f)
-		w_info->zoom /= 1.1;
+	{
+		if (ftype == NEWTON)
+			w_info->zoom *= 1.1;
+		else
+			w_info->zoom /= 1.1;
+	}
 	else
 		return (0);
 	return (1);
@@ -59,8 +69,14 @@ int	decrease_iterations(t_frctl *frctl)
 	return (1);
 }
 
-void	move(t_winfo *w_info, int x, int y)
+void	move(t_winfo *w_info, t_ftype ftype, int x, int y)
 {
+	if (ftype == NEWTON)
+	{
+		w_info->m_x += x * 0.1 * w_info->zoom;
+		w_info->m_y += y * 0.1 * w_info->zoom;
+		return ;
+	}
 	w_info->m_x += x * 0.1 / w_info->zoom;
 	w_info->m_y += y * 0.1 / w_info->zoom;
 }

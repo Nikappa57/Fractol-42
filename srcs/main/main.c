@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:11:01 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/18 13:14:47 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:18:01 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,4 @@ int	main(int argc, char **argv)
 }
 
 // TODO: mouse zoom
-// TODO: fix .14734 double atoi
+// TODO: controllare leaks
