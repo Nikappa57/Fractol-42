@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newton_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 13:05:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/21 13:28:29 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/22 17:00:10 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,20 @@ void	newton_check_radius(
 	double	mag;
 
 	mag = info.newre * info.newre + info.newim * info.newim;
-	if ((mag > radius)
-		|| (info.newre * info.newre < radius)
-		|| (info.newim * info.newim < radius))
+	
+	if (info.newre * info.newre < radius)
 	{
 		*saved_mag = mag;
 		*saved_iter = info.i;
 	}
-	// if (info.newre * info.newre < radius)
-	// {
-	// 	*saved_mag = info.newre * info.newre;
-	// 	*saved_iter = info.i;
-	// }
-	// if (info.newim * info.newim < radius)
-	// {
-	// 	*saved_mag = info.newim * info.newim;
-	// 	*saved_iter = info.i;
-	// }
+	if (info.newim * info.newim < radius)
+	{
+		*saved_mag = mag;
+		*saved_iter = info.i;
+	}
+	if ((mag > radius))
+	{
+		*saved_mag = mag;
+		*saved_iter = info.i;
+	}
 }

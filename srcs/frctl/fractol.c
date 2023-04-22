@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/21 13:13:40 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/22 15:10:02 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	mandelbrot(t_vars *vars, t_frctl_info info, int x, int y)
 {
-	info.pr = get_xmove_pos(x, vars->w_info->zoom, vars->w_info->m_x);
+	info.pr = get_xmove_pos(x, vars->w_info);
 	info.newre = 0;
 	info.newim = 0;
 	info.ore = 0;
@@ -33,7 +33,7 @@ static void	mandelbrot(t_vars *vars, t_frctl_info info, int x, int y)
 
 static void	julia(t_vars *vars, t_frctl_info info, int x, int y)
 {
-	info.newre = get_xmove_pos(x, vars->w_info->zoom, vars->w_info->m_x);
+	info.newre = get_xmove_pos(x, vars->w_info);
 	info.ore = 0;
 	info.oim = 0;
 	info.i = 0;
@@ -77,9 +77,9 @@ static void	newton(t_vars *vars, t_frctl_info info, int x, int y)
 static void	set_y_info(t_vars *vars, t_frctl_info *info, t_ftype f_type, int y)
 {
 	if (f_type == MANDELBROT)
-		info->pi = get_ymove_pos(y, vars->w_info->zoom, vars->w_info->m_y);
+		info->pi = get_ymove_pos(y, vars->w_info);
 	else if (f_type == JULIA)
-		info->newim = get_ymove_pos(y, vars->w_info->zoom, vars->w_info->m_y);
+		info->newim = get_ymove_pos(y, vars->w_info);
 	else
 		info->nwtn_incy = -vars->w_info->zoom + 2 * vars->w_info->zoom
 			/ WINDOW_HEIGHT * y;

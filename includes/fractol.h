@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
+/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/21 13:13:56 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/22 16:40:14 by lgaudino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_vars {
 /*		MLX		*/
 
 /* window info */
-# define WINDOW_WIDTH	1200
-# define WINDOW_HEIGHT	800
+# define WINDOW_WIDTH	600
+# define WINDOW_HEIGHT	600
 # define WINDOW_TITLE	"fract'ol - "
 
 /* drow */
@@ -117,8 +117,8 @@ typedef struct s_mandel_info {
 }	t_frctl_info;
 
 /* utils */
-double			get_xmove_pos(int x, double zoom, double move_x);
-double			get_ymove_pos(int y, double zoom, double move_y);
+double			get_xmove_pos(int x, t_winfo *w_info);
+double			get_ymove_pos(int y, t_winfo *w_info);
 int				check_radius(t_vars *vars, t_frctl_info info, int x, int y);
 int				set_frctl_type(
 					t_frctl *frctl, t_winfo *w_info, int argc, char **argv);
