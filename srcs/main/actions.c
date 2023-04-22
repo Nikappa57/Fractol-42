@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:29:57 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 14:27:00 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/21 12:30:55 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ int	increase_iterations(t_frctl *frctl)
 {
 	int	old_iter;
 
+	if (frctl->type == NEWTON)
+	{
+		if (frctl->maxiter > MAX_ITER - 1)
+			return (0);
+		frctl->maxiter += 1;
+		return (1);
+	}
 	old_iter = frctl->maxiter;
 	if (frctl->maxiter < MIN_ITER)
 		frctl->maxiter = MIN_ITER;
@@ -55,6 +62,13 @@ int	decrease_iterations(t_frctl *frctl)
 {
 	int	old_iter;
 
+	if (frctl->type == NEWTON)
+	{
+		if (frctl->maxiter < 2)
+			return (0);
+		frctl->maxiter -= 1;
+		return (1);
+	}
 	old_iter = frctl->maxiter;
 	if (frctl->maxiter > MAX_ITER)
 		frctl->maxiter = MAX_ITER;

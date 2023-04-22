@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 16:59:25 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/21 13:13:56 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,10 @@ int				check_radius(t_vars *vars, t_frctl_info info, int x, int y);
 int				set_frctl_type(
 					t_frctl *frctl, t_winfo *w_info, int argc, char **argv);
 void			mouse_update_julia(t_vars *vars);
+double			newton_re(t_frctl_info info);
+double			newton_im(t_frctl_info info);
+void			newton_check_radius(t_frctl_info info, double radius,
+					double *saved_mag, int *saved_iter);
 
 /* fractol */
 void			show_frctl(t_vars *vars);

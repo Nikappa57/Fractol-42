@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/20 17:15:12 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/21 13:13:40 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ static void	julia(t_vars *vars, t_frctl_info info, int x, int y)
 
 static void	newton(t_vars *vars, t_frctl_info info, int x, int y)
 {
+	double	saved_mag;
+	int		saved_iter;
+
+	saved_mag = 0;
 	info.nwtn_incx = -vars->w_info->zoom + 2 * vars->w_info->zoom
 		/ WINDOW_WIDTH * x;
 	info.ore = info.nwtn_incx + vars->w_info->m_x;
@@ -59,18 +63,15 @@ static void	newton(t_vars *vars, t_frctl_info info, int x, int y)
 	info.i = 0;
 	while (info.i++ < vars->frctl->maxiter)
 	{
-		info.newre = 2 * info.ore / 3
-			- (info.ore * info.ore - info.oim * info.oim)
-			/ (info.ore * info.ore + info.oim * info.oim)
-			/ (info.ore * info.ore + info.oim * info.oim) / 3;
-		info.newim = 2 * info.oim / 3 + 2 * info.ore * info.oim
-			/ (info.ore * info.ore + info.oim * info.oim)
-			/ (info.ore * info.ore + info.oim * info.oim) / 3;
+		info.newre = newton_re(info);
+		info.newim = newton_im(info);
 		info.ore = info.newre * vars->frctl->inc;
 		info.oim = info.newim * vars->frctl->inc;
-		if (check_radius(vars, info, x, y))
-			break ;
+		newton_check_radius(info, vars->frctl->radius, &saved_mag, &saved_iter);
 	}
+	if (saved_mag)
+		ft_mlx_pixel_put(vars->img, x, y,
+			get_color(vars, saved_iter, sqrt(saved_mag)));
 }
 
 static void	set_y_info(t_vars *vars, t_frctl_info *info, t_ftype f_type, int y)

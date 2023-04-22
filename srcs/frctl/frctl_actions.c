@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandel_actions.c                                   :+:      :+:    :+:   */
+/*   frctl_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:31:41 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 16:44:07 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/20 18:33:58 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	change_radius(t_frctl *frctl, int plus)
 {
 	if (frctl->type == NEWTON)
 	{
-		if (plus && (frctl->radius < INT_MAX / 1.1))
+		if (plus && (frctl->radius * 100 < INT_MAX / 1.1))
 		{
 			frctl->radius *= 1.1;
 		}
-		else if (!plus && frctl->radius > 0.2)
+		else if (!plus && frctl->radius > 1)
 		{
 			frctl->radius /= 1.1;
 		}

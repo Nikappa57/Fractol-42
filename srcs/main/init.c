@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 14:34:54 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/21 12:36:00 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,16 @@ void	init_winfo(t_winfo *w_info, t_ftype f_type)
 void	init_frctl(t_frctl *frctl, int *win)
 {
 	(void)win;
-	frctl->inc = 2;
 	if (frctl->type == NEWTON)
-		frctl->radius = 4;
+	{
+		frctl->radius = 10;
+		frctl->inc = 1.01;
+	}
 	else
+	{
 		frctl->radius = 4;
+		frctl->inc = 2;
+	}
 	frctl->color = 0;
 }
 

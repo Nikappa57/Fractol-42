@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:35:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 16:55:06 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/21 12:40:48 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,22 @@ static void	set_maxmin(t_vars *vars, t_info *info)
 		info->iter = ft_strjoin_gnl(info->iter, " [MAX]");
 	else if (vars->frctl->maxiter > MAX_ITER)
 		info->iter = ft_strjoin_gnl(info->iter, " [> MAX]");
+	else if (vars->frctl->type == NEWTON)
+	{
+		if (vars->frctl->maxiter < 2)
+			info->iter = ft_strjoin_gnl(info->iter, " [MIN]");
+	}
 	else if (vars->frctl->maxiter == MIN_ITER)
 		info->iter = ft_strjoin_gnl(info->iter, " [MIN]");
 	else if (vars->frctl->maxiter < MIN_ITER)
-		info->iter = ft_strjoin_gnl(info->iter, " [< MAX]");
+		info->iter = ft_strjoin_gnl(info->iter, " [< MIN]");
 	if (vars->frctl->inc * 100 > INT_MAX - 10)
 		info->inc = ft_strjoin_gnl(info->inc, " [MAX]");
 	else if (vars->frctl->inc * 100 < INT_MIN + 10)
 		info->inc = ft_strjoin_gnl(info->inc, " [MIN]");
-	if (vars->frctl->radius >= INT_MAX / vars->frctl->radius - 1)
+	if (vars->frctl->radius * 100 > INT_MAX / 1.1)
 		info->radius = ft_strjoin_gnl(info->radius, " [MAX]");
-	else if (vars->frctl->radius < 8)
+	else if (vars->frctl->radius <= 1)
 		info->radius = ft_strjoin_gnl(info->radius, " [MIN]");
 	if (vars->w_info->zoom * 100 > INT_MAX)
 		info->zoom = ft_strjoin_gnl(info->zoom, " [MAX]");
