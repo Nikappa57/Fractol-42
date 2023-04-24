@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/24 19:02:48 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:56:19 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void	show_frctl(t_vars *vars)
 		y++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img_ptr, 0, 0);
-	set_info(vars);
+	if (vars->w_info->show_info)
+		set_info(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/24 18:56:43 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:55:39 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	hook_settings(int keycode, t_vars *vars)
 		init_winfo(vars->w_info, vars->frctl->type);
 		init_frctl(vars->frctl);
 	}
+	else if (keycode == KEY_V)
+		change_show_info(vars->w_info);
 	else
 		return (0);
 	return (1);

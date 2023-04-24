@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/24 19:18:57 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:55:02 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_imgdata {
 /* win info */
 typedef struct s_wininfo {
 	double	zoom;
+	int		show_info;
 	int		track_mouse;
 	int		mouse_x;
 	int		mouse_y;
@@ -141,6 +142,7 @@ int				decrease_iterations(t_frctl *frctl);
 void			move(t_winfo *w_info, t_ftype ftype, int x, int y);
 void			mouse_track(t_winfo *w_info);
 void			change_newton_ctype(t_frctl *frctl);
+void			change_show_info(t_winfo *w_info);
 
 /*		COLOR		*/
 

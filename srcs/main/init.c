@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/24 18:55:19 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:52:24 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_winfo(t_winfo *w_info, t_ftype f_type)
 {
 	w_info->mouse_x = 0;
 	w_info->mouse_y = 0;
+	w_info->show_info = 1;
 	if (f_type == MANDELBROT)
 	{
 		w_info->zoom = 0.68;
