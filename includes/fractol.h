@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/24 19:02:41 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:18:57 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int				mouse_hook(int keycode, int x, int y, t_vars *vars);
 /*		FRACTOL		*/
 
 /* default info */
-# define MAX_ITER 100
+# define MAX_ITER 200
 # define MIN_ITER 10
 
 /* fractols info */
