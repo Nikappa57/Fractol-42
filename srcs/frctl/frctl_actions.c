@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:31:41 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 18:33:58 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:53:54 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,56 @@ int	change_inc(t_frctl *frctl, int plus)
 	else if (frctl->inc * 100 >= INT_MIN + 1)
 		frctl->inc -= 0.01;
 	else
+		return (0);
+	return (1);
+}
+
+int	increase_iterations(t_frctl *frctl)
+{
+	int	old_iter;
+
+	if (frctl->type == NEWTON)
+	{
+		if (frctl->maxiter > MAX_ITER - 1)
+			return (0);
+		frctl->maxiter += 1;
+		return (1);
+	}
+	old_iter = frctl->maxiter;
+	if (frctl->maxiter < MIN_ITER)
+		frctl->maxiter = MIN_ITER;
+	else if (frctl->maxiter < MAX_ITER / 2)
+		frctl->maxiter += MAX_ITER / 10;
+	else if (frctl->maxiter < MAX_ITER)
+		frctl->maxiter += MAX_ITER / 4;
+	if (frctl->maxiter > MAX_ITER && old_iter <= MAX_ITER)
+		frctl->maxiter = MAX_ITER;
+	if (old_iter == frctl->maxiter)
+		return (0);
+	return (1);
+}
+
+int	decrease_iterations(t_frctl *frctl)
+{
+	int	old_iter;
+
+	if (frctl->type == NEWTON)
+	{
+		if (frctl->maxiter < 2)
+			return (0);
+		frctl->maxiter -= 1;
+		return (1);
+	}
+	old_iter = frctl->maxiter;
+	if (frctl->maxiter > MAX_ITER)
+		frctl->maxiter = MAX_ITER;
+	else if (frctl->maxiter > MAX_ITER / 2)
+		frctl->maxiter -= MAX_ITER / 4;
+	else if (frctl->maxiter > MIN_ITER)
+		frctl->maxiter -= MAX_ITER / 10;
+	if (frctl->maxiter < MIN_ITER && old_iter >= MIN_ITER)
+		frctl->maxiter = MIN_ITER;
+	if (old_iter == frctl->maxiter)
 		return (0);
 	return (1);
 }
