@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:32:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 12:34:44 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 23:18:24 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ int	set_frctl_type(t_frctl *frctl, t_winfo *w_info, int argc, char **argv)
 		return (0);
 	frctl->type = ftype;
 	frctl->maxiter = ft_atoi(argv[2]);
+	if (frctl->maxiter < 0)
+		return (0);
 	return (1);
 }
