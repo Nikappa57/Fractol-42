@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:35:08 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/21 12:40:48 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:50:30 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ static void	set_maxmin(t_vars *vars, t_info *info)
 		info->radius = ft_strjoin_gnl(info->radius, " [MAX]");
 	else if (vars->frctl->radius <= 1)
 		info->radius = ft_strjoin_gnl(info->radius, " [MIN]");
-	if (vars->w_info->zoom * 100 > INT_MAX)
-		info->zoom = ft_strjoin_gnl(info->zoom, " [MAX]");
-	else if (vars->w_info->zoom * 100 < INT_MIN)
-		info->zoom = ft_strjoin_gnl(info->zoom, " [MIN]");
 }
 
 void	set_info(t_vars *vars)
@@ -69,7 +65,10 @@ void	set_info(t_vars *vars)
 	info.radius = ft_strjoin_gnl(
 			ft_itoa(sqrt(vars->frctl->radius) * 100), "/100");
 	info.color = ft_itoa(vars->frctl->color + 1);
-	info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100), "/100");
+	if (vars->w_info->zoom * 100 > INT_MAX)
+		info.zoom = ft_strdup("[> MAX]");
+	else
+		info.zoom = ft_strjoin_gnl(ft_itoa(vars->w_info->zoom * 100), "/100");
 	set_maxmin(vars, &info);
 	drow_info(vars, info);
 }
