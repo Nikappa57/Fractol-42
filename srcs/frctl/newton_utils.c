@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newton_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 13:05:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/22 17:00:10 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:08:11 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,34 @@ double	newton_im(t_frctl_info info)
 		/ (info.ore * info.ore + info.oim * info.oim) / 3);
 }
 
-void	newton_check_radius(
-		t_frctl_info info, double radius, double *saved_mag, int *saved_iter)
+int	newton_check_radius(
+		t_frctl_info info, t_frctl *frctl, double *saved_mag, int *saved_iter)
 {
 	double	mag;
 
-	mag = info.newre * info.newre + info.newim * info.newim;
-	
-	if (info.newre * info.newre < radius)
+	mag = info.ore * info.ore + info.oim * info.oim;
+	if (info.ore * info.ore - info.oim * info.oim > 0)
 	{
-		*saved_mag = mag;
+		if (frctl->newton_ctype)
+			*saved_mag = mag / (info.ore * info.ore);
+		else
+			*saved_mag = mag;
 		*saved_iter = info.i;
+		return (1);
 	}
-	if (info.newim * info.newim < radius)
+	if (info.oim * info.oim - info.ore * info.ore > 0)
 	{
-		*saved_mag = mag;
+		if (frctl->newton_ctype)
+			*saved_mag = mag / (info.oim * info.oim);
+		else
+			*saved_mag = mag;
 		*saved_iter = info.i;
+		return (2);
 	}
-	if ((mag > radius))
-	{
-		*saved_mag = mag;
-		*saved_iter = info.i;
-	}
+	return (0);
+}
+
+void	change_newton_ctype(t_frctl *frctl)
+{
+	frctl->newton_ctype = !frctl->newton_ctype;
 }

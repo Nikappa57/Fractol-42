@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 01:32:19 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/16 01:41:43 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:12:08 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	set_palette_2(int *palette)
 void	set_palette_3(int *palette)
 {
 	*palette++ = BLUE;
-	*palette++ = NAVY;
+	*palette++ = ORANGE;
 	*palette = WHITE;
 }

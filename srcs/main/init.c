@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 00:25:42 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/21 12:36:00 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 18:55:19 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	init_winfo(t_winfo *w_info, t_ftype f_type)
 	}
 }
 
-void	init_frctl(t_frctl *frctl, int *win)
+void	init_frctl(t_frctl *frctl)
 {
-	(void)win;
 	if (frctl->type == NEWTON)
 	{
 		frctl->radius = 10;
 		frctl->inc = 1.01;
+		frctl->newton_ctype = 0;
 	}
 	else
 	{
@@ -75,7 +75,7 @@ t_vars	*init_vars(int argc, char **argv)
 	vars->frctl = (t_frctl *) malloc(sizeof(t_frctl));
 	if (!set_frctl_type(vars->frctl, vars->w_info, argc, argv))
 		ft_mlx_close(KEY_ERROR, vars);
-	init_frctl(vars->frctl, vars->win);
+	init_frctl(vars->frctl);
 	vars->mlx = mlx_init();
 	title = ft_strjoin(WINDOW_TITLE, argv[1]);
 	vars->win = mlx_new_window(

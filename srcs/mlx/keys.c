@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:27:18 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 16:44:07 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 18:56:43 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	hook_settings(int keycode, t_vars *vars)
 	else if (keycode == KEY_R)
 	{
 		init_winfo(vars->w_info, vars->frctl->type);
-		init_frctl(vars->frctl, vars->win);
+		init_frctl(vars->frctl);
 	}
 	else
 		return (0);
@@ -57,6 +57,8 @@ static int	hook_frctl_actions(int keycode, t_vars *vars)
 		return (change_radius(vars->frctl, keycode == KEY_N));
 	else if ((keycode == KEY_T) && (vars->frctl->type == JULIA))
 		mouse_track(vars->w_info);
+	else if (keycode == KEY_T && vars->frctl->type == NEWTON)
+		change_newton_ctype(vars->frctl);
 	else
 		return (0);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:03:34 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 11:09:31 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:59:00 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ int	get_color(t_vars *vars, int iter, double mag)
 			(get_r(palette[clr1]) * (1.0f - t2) + get_r(palette[clr2]) * t2),
 			(get_g(palette[clr1]) * (1.0f - t2) + get_g(palette[clr2]) * t2),
 			(get_b(palette[clr1]) * (1.0f - t2) + get_b(palette[clr2]) * t2)));
+}
+
+int	get_color_newton(t_vars *vars, int iter, double mag, int color_n)
+{
+	int	color;
+	int	old_color;
+
+	color = 0;
+	old_color = vars->frctl->color;
+	color_n--;
+	while (color_n-- > 0)
+		shift_color(vars->frctl);
+	color = get_color(vars, iter, mag);
+	vars->frctl->color = old_color;
+	return (color);
 }
 
 /* Simple color */

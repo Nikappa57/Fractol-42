@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:53:19 by lgaudino          #+#    #+#             */
-/*   Updated: 2023/04/22 15:10:02 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:02:48 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ static void	newton(t_vars *vars, t_frctl_info info, int x, int y)
 {
 	double	saved_mag;
 	int		saved_iter;
+	int		color_n;
 
+	color_n = 0;
 	saved_mag = 0;
 	info.nwtn_incx = -vars->w_info->zoom + 2 * vars->w_info->zoom
 		/ WINDOW_WIDTH * x;
@@ -67,11 +69,12 @@ static void	newton(t_vars *vars, t_frctl_info info, int x, int y)
 		info.newim = newton_im(info);
 		info.ore = info.newre * vars->frctl->inc;
 		info.oim = info.newim * vars->frctl->inc;
-		newton_check_radius(info, vars->frctl->radius, &saved_mag, &saved_iter);
+		color_n = newton_check_radius(
+				info, vars->frctl, &saved_mag, &saved_iter);
 	}
 	if (saved_mag)
 		ft_mlx_pixel_put(vars->img, x, y,
-			get_color(vars, saved_iter, sqrt(saved_mag)));
+			get_color_newton(vars, saved_iter, sqrt(saved_mag), color_n));
 }
 
 static void	set_y_info(t_vars *vars, t_frctl_info *info, t_ftype f_type, int y)

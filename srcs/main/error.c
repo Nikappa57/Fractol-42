@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 23:24:32 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/17 23:32:54 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/24 19:14:39 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	print_usage(void)
 	ft_printf("\nCommands:\n\n");
 	ft_printf("\tWASD or arrows for move\n");
 	ft_printf("\t+ -\t(pad) for zoom\n");
-	ft_printf("\tT\ttoggle mouse traking (julia)\n");
+	ft_printf("\tT\t[julia] toggle mouse traking \n");
+	ft_printf("\t\t[newton] change color type\n");
 	ft_printf("\tC\tchange palette\n");
 	ft_printf("\tO-I\tde/increese Max iter\n");
 	ft_printf("\tL-K\tde/increese Inc\n");

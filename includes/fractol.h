@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgaudino <lgaudino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:12:50 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/22 16:40:14 by lgaudino         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:02:41 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_frctl {
 	int		maxiter;
 	double	julia_mx;
 	double	julia_my;
+	int		newton_ctype;
 }	t_frctl;
 
 /* all vars */
@@ -125,7 +126,7 @@ int				set_frctl_type(
 void			mouse_update_julia(t_vars *vars);
 double			newton_re(t_frctl_info info);
 double			newton_im(t_frctl_info info);
-void			newton_check_radius(t_frctl_info info, double radius,
+int				newton_check_radius(t_frctl_info info, t_frctl *frctl,
 					double *saved_mag, int *saved_iter);
 
 /* fractol */
@@ -139,6 +140,7 @@ int				increase_iterations(t_frctl *frctl);
 int				decrease_iterations(t_frctl *frctl);
 void			move(t_winfo *w_info, t_ftype ftype, int x, int y);
 void			mouse_track(t_winfo *w_info);
+void			change_newton_ctype(t_frctl *frctl);
 
 /*		COLOR		*/
 
@@ -158,6 +160,8 @@ void			set_palette_3(int *palette);
 /* pixel color */
 int				get_color(t_vars *vars, int iter, double mag);
 void			shift_color(t_frctl *frctl);
+int				get_color_newton(
+					t_vars *vars, int iter, double mag, int color_n);
 
 /*		MAIN		*/
 
@@ -174,7 +178,7 @@ void			set_info(t_vars *vars);
 
 /* init */
 void			init_winfo(t_winfo *w_info, t_ftype f_type);
-void			init_frctl(t_frctl *frctl, int *win);
+void			init_frctl(t_frctl *frctl);
 t_vars			*init_vars(int argc, char **argv);
 void			print_usage(void);
 
