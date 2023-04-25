@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 11:31:41 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/24 19:53:54 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/04/25 00:12:10 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	change_inc(t_frctl *frctl, int plus)
 		frctl->inc -= 0.01;
 	else
 		return (0);
+	if (frctl->type == NEWTON && frctl->inc == 1)
+		change_inc(frctl, plus);
 	return (1);
 }
 
