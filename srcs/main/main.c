@@ -6,7 +6,7 @@
 /*   By: lorenzogaudino <lorenzogaudino@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:11:01 by lorenzogaud       #+#    #+#             */
-/*   Updated: 2023/04/20 17:18:01 by lorenzogaud      ###   ########.fr       */
+/*   Updated: 2023/05/22 13:54:57 by lorenzogaud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,3 @@ int	main(int argc, char **argv)
 	mlx_loop(vars->mlx);
 	return (0);
 }
-
-// TODO: mouse zoom
-// TODO: controllare leaks
