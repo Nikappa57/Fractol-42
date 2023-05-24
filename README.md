@@ -97,7 +97,7 @@
 - mlx: [agavrel CheatSheet](https://github.com/agavrel/42_CheatSheet#0x01--computer-graphics---using-sdl2-to-create-fractal) | [42 doc](https://harm-smits.github.io/42docs/libs/minilibx)
 - color: [csharphelper.com](http://www.csharphelper.com/howtos/howto_mandelbrot_smooth.html) | [paridebroggi.com](https://www.paridebroggi.com/blogpost/2015/05/06/fractal-continuous-coloring/)
 - julia set [wikipedia](https://en.wikipedia.org/wiki/Julia_set)
-- fractal algorithms [albertostrumia.it/](http://www.albertostrumia.it/sites/default/files/Fractals/FractalGallery2/FractalGallery2.html#map)
+- fractal algorithms [albertostrumia.it](http://www.albertostrumia.it/sites/default/files/Fractals/FractalGallery2/FractalGallery2.html#map)
 
 ## Credits
 - [mlx repo](https://github.com/42Paris/minilibx-linux)
