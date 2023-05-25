@@ -21,6 +21,8 @@
 <p align="center">
 	<a href="#fractals">Fractals</a>
 	·
+	<a href="#install">Install</a>
+	·
 	<a href="#usage">Usage</a>
 	·
 	<a href="#useful-links">Useful links</a>
@@ -34,6 +36,13 @@
 - [x] Mandelbrot
 - [x] Julia
 - [x] Newton
+
+## Install
+```
+git clone https://github.com/Nikappa57/Fractol-42.git
+cd Fractol-42
+make
+```
 
 ## Usage
 ```
